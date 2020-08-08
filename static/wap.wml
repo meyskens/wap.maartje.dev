@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+<card id="card1" title="Maartje's WAP">
+<p>
+Hello World!
+</p>
+
+<p>
+Welcome to my way too simple WAP website!
+</p>
+
+
+<p>
+<a href="dl/iRail.jar>Download iRail</a>
+</p>
+
+<p>
+<a href="dl/NokiaRemote.jar>Download NokiaRemote</a>
+</p>
+
+</card>
+</wml>

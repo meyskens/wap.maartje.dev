@@ -1,0 +1,8 @@
+MIDlet-1: HelloMIDlet, , hello.HelloMIDlet
+MIDlet-Jar-Size: 27272
+MIDlet-Jar-URL: NokiaRemote.jar
+MIDlet-Name: NokiaRemote
+MIDlet-Vendor: Maartje Eyskens
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.0
+MicroEdition-Profile: MIDP-1.0
