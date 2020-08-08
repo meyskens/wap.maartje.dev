@@ -25,7 +25,7 @@ func serveWML(c echo.Context) error {
 		c.String(http.StatusNotFound, "")
 	} else if err != nil {
 		log.Panicln(err)
-		c.String(http.StatusInternalServerError, "")
+		return c.String(http.StatusInternalServerError, "")
 	}
 
 	return c.Stream(http.StatusOK, "text/vnd.wap.wml", f)
@@ -33,14 +33,18 @@ func serveWML(c echo.Context) error {
 
 func serveDL(c echo.Context) error {
 	c.Path()
-	_, file := path.Split(c.Path())
+	req := c.Request()
+	if req == nil {
+		return c.String(http.StatusInternalServerError, "")
+	}
+	_, file := path.Split(req.URL.Path)
 	f, err := os.Open("./static/dl/" + file)
 
 	if err == os.ErrNotExist {
-		c.String(http.StatusNotFound, "")
+		return c.String(http.StatusNotFound, "")
 	} else if err != nil {
 		log.Panicln(err)
-		c.String(http.StatusInternalServerError, "")
+		return c.String(http.StatusInternalServerError, "")
 	}
 
 	// Go is incorrect when judging Java files
