@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 	"path"
@@ -23,6 +24,7 @@ func serveWML(c echo.Context) error {
 	if err == os.ErrNotExist {
 		c.String(http.StatusNotFound, "")
 	} else if err != nil {
+		log.Panicln(err)
 		c.String(http.StatusInternalServerError, "")
 	}
 
@@ -37,6 +39,7 @@ func serveDL(c echo.Context) error {
 	if err == os.ErrNotExist {
 		c.String(http.StatusNotFound, "")
 	} else if err != nil {
+		log.Panicln(err)
 		c.String(http.StatusInternalServerError, "")
 	}
 
