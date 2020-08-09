@@ -9,8 +9,7 @@
 </p>
 {{- end }}
 <p>
-</p>
 {{ .Item.Content }}
-<p>
+</p>
 </card>
 </wml>
