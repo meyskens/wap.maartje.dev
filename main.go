@@ -12,14 +12,16 @@ import (
 
 func main() {
 	e := echo.New()
-	e.GET("/*", serveWML)
+	e.GET("/", serveHome)
 	e.GET("/dl/*", serveDL)
+	e.GET("/nws/list", serveNewsList)
+	e.GET("/nws/item", serveNewsItem)
 
 	e.Start(":80")
 }
 
-func serveWML(c echo.Context) error {
-	f, err := os.Open("./static/wap.wml")
+func serveHome(c echo.Context) error {
+	f, err := os.Open("./static/home.wml")
 
 	if err == os.ErrNotExist {
 		c.String(http.StatusNotFound, "")
