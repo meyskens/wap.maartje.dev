@@ -36,11 +36,20 @@ func serveNewsList(c echo.Context) error {
 
 	nwsItems := []nwsItem{}
 	for _, item := range feed.Items {
+		if strings.HasPrefix(item.Title, "Het weer") || strings.HasPrefix(item.Title, "Het Journaal") {
+			// useless news items
+			continue
+		}
 		nwsItems = append(nwsItems, nwsItem{
-			Title: item.Title,
+			Title: trimTitle(item.Title),
 			Href:  fmt.Sprintf("/nws/item?id=%s", template.URLQueryEscaper(item.GUID)),
 		})
 	}
+
+	if len(nwsItems) > 30 {
+		nwsItems = nwsItems[:30]
+	}
+
 	return tmpl.Execute(c.Response().Writer, struct{ Items []nwsItem }{Items: nwsItems})
 }
 
@@ -67,8 +76,8 @@ func serveNewsItem(c echo.Context) error {
 	}
 
 	item := nwsItem{
-		Title:   article.Title,
-		Content: article.Description,
+		Title:   trimTitle(article.Title),
+		Content: fmt.Sprintf("%s<br />%s", article.Title, article.Description),
 	}
 
 	if article.Image != nil {
@@ -89,4 +98,12 @@ func serveNewsItem(c echo.Context) error {
 		return err
 	}
 	return nil
+}
+
+func trimTitle(in string) string {
+	if len(in) > 40 {
+		return fmt.Sprintf("%s...", in[:40])
+	}
+
+	return in
 }
