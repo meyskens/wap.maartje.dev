@@ -8,6 +8,8 @@ RUN go build -o server ./
 
 FROM alpine:3.12
 
+RUN apk add --no-cache ca-certificates
+
 RUN mkdir /opt/wap.maartje.dev
 WORKDIR /opt/wap.maartje.dev
 
