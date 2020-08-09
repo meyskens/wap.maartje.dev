@@ -7,8 +7,6 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/davecgh/go-spew/spew"
-
 	"github.com/labstack/echo/v4"
 	"github.com/mmcdole/gofeed"
 )
@@ -67,8 +65,6 @@ func serveNewsItem(c echo.Context) error {
 		log.Println(id)
 		return c.String(http.StatusNotFound, "")
 	}
-
-	spew.Dump(article)
 
 	item := nwsItem{
 		Title:   article.Title,
