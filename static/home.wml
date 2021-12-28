@@ -16,6 +16,10 @@ Welcome to my way too simple WAP website!
 </p>
 
 <p>
+<a href="nws/list?max=10">Read VRT NWS (10 items, for older phones)</a>
+</p>
+
+<p>
 <a href="dl/iRail.jar">Download iRail</a>
 </p>
 

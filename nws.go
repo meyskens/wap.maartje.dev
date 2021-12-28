@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 	"text/template"
 
@@ -29,6 +30,14 @@ func serveNewsList(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, "")
 	}
 
+	maxItems := 30
+	if c.QueryParam("max") != "" {
+		maxItems, err = strconv.Atoi(c.QueryParam("max"))
+		if err != nil {
+			return c.String(http.StatusBadRequest, "")
+		}
+	}
+
 	tmpl := template.Must(template.ParseFiles("./static/nws/list.wml"))
 
 	c.Response().Header().Set("Content-Type", "text/vnd.wap.wml")
@@ -46,8 +55,8 @@ func serveNewsList(c echo.Context) error {
 		})
 	}
 
-	if len(nwsItems) > 30 {
-		nwsItems = nwsItems[:30]
+	if len(nwsItems) > maxItems {
+		nwsItems = nwsItems[:maxItems]
 	}
 
 	return tmpl.Execute(c.Response().Writer, struct{ Items []nwsItem }{Items: nwsItems})
