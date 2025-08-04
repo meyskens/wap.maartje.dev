@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine as build
+FROM golang:1.24-alpine as build
 
 COPY ./ /go/src/github.com/meyskens/wap.maartje.dev
 
@@ -6,7 +6,7 @@ WORKDIR /go/src/github.com/meyskens/wap.maartje.dev
 
 RUN go build -o server ./
 
-FROM alpine:3.12
+FROM alpine:edge
 
 RUN apk add --no-cache ca-certificates
 
